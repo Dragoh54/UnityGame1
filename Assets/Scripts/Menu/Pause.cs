@@ -1,14 +1,13 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Menu
 {
     public class Pause : MonoBehaviour
     {
-        [FormerlySerializedAs("Pause_Panel")] 
         [Header("Panel")]
         public GameObject pausePanel;
         public GameObject settingsPanel;
+        public GameObject gamePanel;
 
         private void Awake()
         {
@@ -18,8 +17,7 @@ namespace Menu
 
         private void Update()
         {
-            if (Time.timeScale == 1f)
-            {
+            if (Time.timeScale == 1f){
                 GamePause();
             }
             else
@@ -34,15 +32,17 @@ namespace Menu
             {
                 Time.timeScale = 0f;
                 pausePanel.SetActive(true);
+                gamePanel.SetActive(false);
             }
         }
 
         public void Return()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) && Time.timeScale == 0f)
             {
                 pausePanel.SetActive(false);
                 settingsPanel.SetActive(false);
+                gamePanel.SetActive(true);
                 Time.timeScale = 1f;
             }
         }
@@ -51,6 +51,13 @@ namespace Menu
         {
             pausePanel.SetActive(false);
             settingsPanel.SetActive(true);
+        }
+
+        protected void TurnOffPanels()
+        {
+            pausePanel.SetActive(false);
+            settingsPanel.SetActive(false);
+            gamePanel.SetActive(false);
         }
     }
 }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Audio;
 
 namespace Floor
 {
@@ -7,7 +6,6 @@ namespace Floor
     {
         [Header("Ground detection")] 
         [SerializeField] private LayerMask groundLayer;
-        [SerializeField] private LayerMask gameOver;
 
         [Header("Gravity")] 
         private Rigidbody _rb;
@@ -42,8 +40,8 @@ namespace Floor
 
         public bool IsGrounded(GameObject floor, LayerMask mask)
         {
-            BoxCollider boxCollider = floor.GetComponent<BoxCollider>();
-            return Physics.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size,
+            MeshCollider meshCollider = floor.GetComponent<MeshCollider>();
+            return Physics.BoxCast(meshCollider.bounds.center, meshCollider.bounds.size,
                 Vector3.down, Quaternion.identity, 0.1f, mask);
         }
 

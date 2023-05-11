@@ -8,19 +8,19 @@ namespace GameOver
 {
     public class Endgame : MonoBehaviour
     {
-        [FormerlySerializedAs("GameOverTag")]
         [Header("Game Objects")]
         [SerializeField] public string gameOverTag;
-        
-        [FormerlySerializedAs("GameOverPanel")] 
         public GameObject gameOverPanel;
-        
         private GameObject _loseTarget;
+
+        [Header("is GameOver")]
+        public static bool IsGameOver;
 
         private void Awake()
         {
             gameOverTag ??= "Lose";
             gameOverPanel.SetActive(false);
+            IsGameOver = false;
         }
 
         private void Update()
@@ -37,6 +37,7 @@ namespace GameOver
         {
             Time.timeScale = 0f;
             gameOverPanel.SetActive(true);
+            IsGameOver = true;
             if (Input.GetKeyDown(KeyCode.R))
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

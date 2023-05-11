@@ -15,6 +15,7 @@ TagManager:
   - Toggle
   - Slider
   - Particle
+  - PlacedRoof
   layers:
   - Default
   - TransparentFX

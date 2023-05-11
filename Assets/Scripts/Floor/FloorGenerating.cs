@@ -1,63 +1,50 @@
-using TMPro;
+using System;
 using UnityEngine;
 
 namespace Floor
 {
-    public class FloorRespawn : MonoBehaviour
+    public class FloorRespawn : FloorGeneratingMethods
     {
         [Header("Game Objects")]
         public GameObject floor;
-        public GameObject deadZone;
         private GameObject _fallingFloor;
+        private ParticleSystem _particle;
 
         [Header("Rotating")]
-        private bool _isRotate; 
-    
-        [Header("Floors")]
-        public static int _floorCounter = 0;
+        private bool _isFall;
 
         private void Awake()
         {
             _fallingFloor = Instantiate(floor, this.transform.position, Quaternion.identity);
+            _particle = _fallingFloor.GetComponentInChildren<ParticleSystem>();
+
             _fallingFloor.gameObject.layer = 6;
 
-            _isRotate = true;
-
-            _floorCounter = 0;
+            _isFall = true;
         }
-        
+
         private void Update()
         {
-            RotateFloor(_fallingFloor.transform);
-            if (_fallingFloor.CompareTag("Placed_Floor") && !_isRotate)
+            _isFall = IsStartFall(_isFall, _particle);
+            if (_isFall)
             {
-                Generate();
-                _floorCounter += 1;
-                _isRotate = true;
+                RotateFloor(_fallingFloor.transform);
             }
         }
 
-        private void Generate()
+        private void FixedUpdate()
         {
-            _fallingFloor = Instantiate(floor, this.transform.position, Quaternion.identity);
-            transform.position = transform.position + Vector3.up;
+            if (_fallingFloor.CompareTag("Placed_Floor") && !_isFall)
+            {
+                Generate(floor);
+                _isFall = true;
+            }
         }
 
-        private void RotateFloor(Transform obj)
+        private void Generate(GameObject floor)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                _isRotate = false;
-            }
-            else if (_isRotate)
-            {
-                obj.position = new Vector3
-                {
-                    x = Mathf.Sin(Time.time) + 1, 
-                    y = 0.5f * Mathf.Sin(Time.time * 0.5f) + this.gameObject.transform.position.y,
-                    z = obj.position.z
-                };
-            }
+            _fallingFloor = GenerateFloor(floor);
+            _particle = GenerateParticle(_fallingFloor);
         }
     }
 }

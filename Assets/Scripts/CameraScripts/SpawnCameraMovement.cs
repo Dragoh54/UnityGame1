@@ -33,7 +33,7 @@ namespace CameraScripts
                 Vector3 temp = new Vector3()
                 {
                     x = position.x,
-                    y = position.y - 3f,
+                    y = position.y - 2f,
                     z = position.z - 6f
                 };
                 Vector3 pos = Vector3.Lerp(this.transform.position, temp, speed * Time.deltaTime);

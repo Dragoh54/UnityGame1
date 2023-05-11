@@ -8,12 +8,12 @@ namespace Menu
         public void Menu()
         {
             Time.timeScale = 1f;
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("LoadMainMenu");
         }
 
         public void StartGame()
         {
-            SceneManager.LoadScene("BuildScene");
+            SceneManager.LoadScene("LoadBuildScene");
         }
 
         public void Exit() { 
