@@ -14,20 +14,20 @@ namespace Levels
         public void LoadLevel(int index)
         {
             SceneManager.LoadScene(index);
+            Time.timeScale = 1f;
         }
 
         public void ResetProgress()
         {
-            maxLevel = 1;
-            PlayerPrefs.SetInt("MaxLevel", maxLevel);
+            PlayerPrefs.SetInt("MaxLevel", 1);
             SceneManager.LoadScene("LoadMainMenu");
         }
         
         protected void Save(int level)
         {
-            if (level >= maxLevel)
+            if (level + 1 >= maxLevel)
             {
-                PlayerPrefs.SetInt("MaxLevel", level);
+                PlayerPrefs.SetInt("MaxLevel", level + 1);
             }
         }
 

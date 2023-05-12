@@ -9,7 +9,7 @@ namespace Levels
         [Header("Current level")] 
         public int currentLevel;
         
-        private void FixedUpdate()
+        private void Update()
         {
             if (RoofGenerating.IsPlaced)
             {

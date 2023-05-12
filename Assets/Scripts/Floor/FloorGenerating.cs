@@ -32,7 +32,7 @@ namespace Floor
             }
         }
 
-        private void FixedUpdate()
+        private void LateUpdate()
         {
             if (_fallingFloor.CompareTag("Placed_Floor") && !_isFall)
             {

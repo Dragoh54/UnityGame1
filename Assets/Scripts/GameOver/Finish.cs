@@ -33,6 +33,7 @@ namespace GameOver
             if (goal == ScoreSystem.Score)
             {
                 floorSpawner.GetComponent<FloorRespawn>().enabled = false;
+                Destroy(GameObject.Find("Floor(Clone)"));
                 floorSpawner.GetComponent<RoofGenerating>().enabled = true;
             }
         }

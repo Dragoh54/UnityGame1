@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Floor;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,8 @@ namespace Load
 
         private void Start()
         {
+            RoofGenerating.IsPlaced = false;
+            Time.timeScale = 1f;
             StartCoroutine(LoadSceneCor());
         }
 
@@ -25,9 +28,10 @@ namespace Load
             _asyncOperation = SceneManager.LoadSceneAsync(SceneID);
             while (!_asyncOperation.isDone)
             {
-                float progress = _asyncOperation.progress / 9f;
-                LoadBar.fillAmount = progress;
-                BarText.text = "Load... " + string.Format("{0:0}%", progress * 100f);
+                float progress = _asyncOperation.progress;
+                LoadBar.fillAmount = progress + 0.1f;
+                print(progress);
+                BarText.text = "Loading... " + string.Format("{0:0}%", progress / 9f * 1000f);
                 yield return 0;
             }
         }

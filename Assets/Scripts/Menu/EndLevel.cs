@@ -1,7 +1,5 @@
-﻿using System;
-using Floor;
+﻿using Floor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Menu
 {
@@ -14,7 +12,7 @@ namespace Menu
             finishPanel.SetActive(false);
         }
 
-        private void FixedUpdate()
+        private void LateUpdate()
         {
             if (RoofGenerating.IsPlaced)
             {

@@ -3,6 +3,7 @@ using Floor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace GameOver
 {
@@ -15,6 +16,8 @@ namespace GameOver
 
         [Header("is GameOver")]
         public static bool IsGameOver;
+        
+        private float nt = 0f;
 
         private void Awake()
         {
@@ -30,19 +33,26 @@ namespace GameOver
             if (_loseTarget != null)
             {
                 GameOver();
+                ChangeColor();
             }
         }
 
         private void GameOver()
         {
-            Time.timeScale = 0f;
             gameOverPanel.SetActive(true);
+            GameObject.FindGameObjectWithTag("Spawner").GetComponentInChildren<FloorRespawn>().enabled = false;
             IsGameOver = true;
             if (Input.GetKeyDown(KeyCode.R))
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                SceneManager.LoadScene("LoadBuildScene");
                 Time.timeScale = 1f;
             }
+        }
+
+        private void ChangeColor()
+        {
+            nt += Time.deltaTime;
+            gameOverPanel.GetComponent<Image>().color = new Color(0f,0f,0f, nt * 0.5f);
         }
     }
 }
