@@ -4,15 +4,15 @@ namespace Floor
 {
     public class FloorFall : MonoBehaviour
     {
-        [Header("Ground detection")] 
-        [SerializeField] private LayerMask groundLayer;
-
-        [Header("Gravity")] 
-        private Rigidbody _rb;
+        [Header("Ground detection")] [SerializeField]
+        private LayerMask groundLayer;
 
         [Header("Audio")] 
         private AudioSource _audioSource;
         public AudioClip audioClip;
+        
+        [Header("Gravity")] 
+        private Rigidbody _rb;
 
         void Awake()
         {

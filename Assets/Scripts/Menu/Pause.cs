@@ -9,7 +9,7 @@ namespace Menu
         public GameObject settingsPanel;
         public GameObject gamePanel;
 
-        private void Awake()
+        private void Awake()    
         {
             pausePanel.SetActive(false);
             settingsPanel.SetActive(false);
@@ -17,12 +17,12 @@ namespace Menu
 
         private void Update()
         {
-            if (Time.timeScale == 1f){
-                GamePause();
+            if (Time.timeScale == 0f){
+                Return();
             }
             else
             {
-                Return();
+                GamePause();
             }
         }
 
